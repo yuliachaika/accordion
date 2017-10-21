@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ACCORDION</title>
+  <style>
+    .accordion {
+      margin-left: 0;
+      background: #fefefe;
+      list-style-type: none;
+    }
+    .accordion__title {
+      position: relative;
+      display: block;
+      padding: 1.25rem 1rem;
+      border: 1px solid #e6e6e6;
+      border-bottom: 0;
+      font-size: 0.75rem;
+      line-height: 1;
+      color: #1779ba;
+    }
+    .accordion__item:last-child:not(.accordion__item--active) .accordion__title {
+      border-bottom: 1px solid #e6e6e6;
+    }
+    .accordion__title::before {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      margin-top: -0.5rem;
+      content: '+';
+    }
+    .accordion__item--active .accordion__title::before {
+      content: '-';
+    }
+    .accordion__content {
+      display: none;
+      padding: 1rem;
+      border: 1px solid #e6e6e6;
+      border-bottom: 0;
+      background-color: #fefefe;
+      color: #0a0a0a;
+    }
+    button {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 0 1rem 0;
+      font-family: inherit;
+      padding: 0.85em 1em;
+      -webkit-appearance: none;
+      border: 1px solid transparent;
+      border-radius: 0;
+      -webkit-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+      transition: background-color 0.25s ease-out, color 0.25s ease-out;
+      font-size: 0.9rem;
+      line-height: 1;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      background-color: #1779ba;
+      color: #fefefe;
+    }
+    textarea {
+      display: block;
+      width: 100%;
+      height: 600px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <ul class="accordion">
+      <li class="accordion__item">
+        <a href="#" class="accordion__title">Accordion 1</a>
+        <div class="accordion__content" style="display: none;">
+          <p>Panel 1. Lorem ipsum dolor</p>
+          <a href="#">Nowhere to Go</a>
+        </div>
+      </li>
+      <li class="accordion__item accordion__item--active">
+        <a href="#" class="accordion__title">Accordion 2</a>
+        <div class="accordion__content" style="display: block;">
+          <textarea></textarea>
+          <button>I do nothing!</button>
+        </div>
+      </li>
+      <li class="accordion__item">
+        <a href="#" class="accordion__title">Accordion 3</a>
+        <div class="accordion__content" style="display: none;">
+          Type your name!
+          <input type="text">
+        </div>
+      </li>
+    </ul>
+  </div>
+  <script src="jquery-3.2.1.min.js"></script>
+  <script>
+   $(document).ready( function() {
+    $('.accordion__title').on('click', function(e) {
+      e.preventDefault();
+      let wrap = $(this).parent();
+      $('.accordion__item').each( function() {
+        if ( $(this).is(wrap)) {
+          $(this).addClass('accordion__item--active ').find('.accordion__content').slideDown();
+        } else {
+          $(this).removeClass('accordion__item--active ').find('.accordion__content').slideUp();
+        }
+      });
+    });
+  });   
+
+</script>
+
+</body>
+</html>
